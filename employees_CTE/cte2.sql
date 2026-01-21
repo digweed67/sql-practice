@@ -60,8 +60,8 @@ SELECT
 	e.first_name || ' ' || e.last_name AS employee_name,
 	l.salary,
 	das.latest_avg_salary,
-	eap.employee_avg_performance,
-	cap.company_avg_performance
+	eap.avg_employee_performance,
+	cap.avg_company_performance
 FROM employees e
 JOIN departments d 
 ON d.department_id = e.department_id
@@ -74,6 +74,6 @@ ON e.employee_id = eap.employee_id
 CROSS JOIN company_avg_performance cap 
 
 WHERE l.salary < das.latest_avg_salary 
-AND eap.avg_employee_performance > cap.company_avg_performance;
+AND eap.avg_employee_performance > cap.avg_company_performance;
 
 

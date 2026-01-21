@@ -116,5 +116,29 @@ INSERT INTO performance_reviews (employee_id, review_date, performance_score) VA
 
 
 SELECT * FROM employees;
+SELECT * FROM departments;
 SELECT * FROM salaries;
 SELECT * FROM performance_reviews;
+
+-- extra data for cte 3 to work 
+
+-- 1. Add Frank Miller to Engineering (department_id = 1)
+INSERT INTO employees (first_name, last_name, department_id, hire_date)
+VALUES ('Frank', 'Miller', 1, '2023-01-01');
+
+-- 2. Add Frank's salary
+INSERT INTO salaries (employee_id, salary, effective_date)
+VALUES (
+    (SELECT employee_id FROM employees WHERE first_name = 'Frank' AND last_name = 'Miller'),
+    80000,
+    '2023-01-01'
+);
+
+-- 3. Add Frank's performance review (low score)
+INSERT INTO performance_reviews (employee_id, review_date, performance_score)
+VALUES (
+    (SELECT employee_id FROM employees WHERE first_name = 'Frank' AND last_name = 'Miller'),
+    '2023-12-01',
+    5
+);
+
