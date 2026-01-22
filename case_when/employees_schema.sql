@@ -137,6 +137,13 @@ VALUES (
     5
 );
 
+-- Add null values for using case when with nulls 
+
+INSERT INTO performance_reviews (employee_id, review_date, performance_score)
+VALUES
+(1, '2024-01-01', NULL),
+(3, '2024-01-01', NULL);
+
 
 SELECT * FROM employees;
 SELECT * FROM departments;
