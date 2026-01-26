@@ -1,10 +1,14 @@
 SET search_path TO public;
 
--- Drop tables if they already exist (for easy re-runs)
-DROP TABLE IF EXISTS performance_reviews;
-DROP TABLE IF EXISTS salaries;
-DROP TABLE IF EXISTS employees;
-DROP TABLE IF EXISTS departments;
+-- Reset schema 
+
+DROP TABLE IF EXISTS performance_reviews CASCADE;
+DROP TABLE IF EXISTS salaries CASCADE;
+DROP TABLE IF EXISTS employees CASCADE;
+DROP TABLE IF EXISTS departments CASCADE;
+
+
+-- Create tables 
 
 -- ======================
 -- Departments
@@ -54,6 +58,7 @@ CREATE TABLE performance_reviews (
         REFERENCES employees(employee_id)
 );
 
+-- Insert Seed data 
 -- ======================
 -- Seed Data
 -- ======================
@@ -144,6 +149,9 @@ VALUES
 (1, '2024-01-01', NULL),
 (3, '2024-01-01', NULL);
 
+
+
+-- selecting all tables 
 
 SELECT * FROM employees;
 SELECT * FROM departments;
