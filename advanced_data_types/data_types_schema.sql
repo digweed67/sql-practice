@@ -1,8 +1,18 @@
+
+CREATE SCHEMA IF NOT EXISTS public; 
+SET search_path TO public; 
+
+DROP TABLE IF EXISTS orders CASCADE;
+DROP TABLE IF EXISTS products CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TYPE IF EXISTS order_status CASCADE;
+
+
 -- ENUM for order status
 CREATE TYPE order_status AS ENUM ('pending','shipped','delivered');
 
 -- Users table with JSONB preferences and array of skills
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
@@ -11,7 +21,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 -- Products table with tags (array) and attributes (JSONB)
-CREATE TABLE IF NOT EXISTS products (
+CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     tags TEXT[],                             -- Array of tags
@@ -19,7 +29,7 @@ CREATE TABLE IF NOT EXISTS products (
 );
 
 -- Orders table with ENUM status and JSONB for optional metadata
-CREATE TABLE IF NOT EXISTS orders (
+CREATE TABLE orders (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id),
     product_ids INT[],                        -- Array of product IDs
